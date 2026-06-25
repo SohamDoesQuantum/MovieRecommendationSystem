@@ -8,10 +8,19 @@ st.title("Movie Recommendation System")
 
 @st.cache_resource
 def load_data():
-    # Your direct download OneDrive links
     movies_url = "https://onedrive.live.com/download?cid=BDC93B19D04E2812&resid=BDC93B19D04E2812%21174246&authkey=AX6Rj9OSg3pTr1srxkgcHgI"
     similarity_url = "https://onedrive.live.com/download?cid=BDC93B19D04E2812&resid=BDC93B19D04E2812%21174317&authkey=AQD5fqpys6RaibbBXN1trHU"
     
+    # Force delete broken/empty files from previous failed attempts
+    for file in ['movies_dict.pkl', 'similarity.pkl']:
+        if os.path.exists(file) and os.path.getsize(file) < 100000:  # If file is too small, it's just broken HTML text
+            os.remove(file)
+            
+    # Download with a User-Agent header so OneDrive allows the direct download
+    opener = urllib.request.build_opener()
+    opener.addheaders = [('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)')]
+    urllib.request.install_opener(opener)
+
     if not os.path.exists('movies_dict.pkl'):
         with st.spinner("Downloading movies data..."):
             urllib.request.urlretrieve(movies_url, 'movies_dict.pkl')
