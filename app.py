@@ -10,8 +10,8 @@ st.title("Movie Recommendation System")
 @st.cache_resource # Prevents downloading it every time a user clicks a button
 def load_data():
     # Replace these IDs with YOUR actual file IDs from the Google Drive links
-    movies_file_id = 'https://drive.google.com/file/d/1OZLjY_UvdiB2cyVx7DWqNNLzbzoMC7FX/view?usp=sharing'
-    similarity_file_id = 'https://drive.google.com/file/d/1sypCwcn3mLXy39QpXVR8I3FOInLyzuDc/view?usp=sharing'
+    movies_file_id = 'https://1drv.ms/u/c/BDC93B19D04E2812/IQAYekEsIzouRYuVY57ND0LoAX6Rj9OSg3pTr1srxkgcHgI?e=wycxri'
+    similarity_file_id = 'https://1drv.ms/u/c/BDC93B19D04E2812/IQD7Y8vxsNRVQ6OuH5igx0YUAQD5fqpys6RaibbBXN1trHU?e=ZrpPy4'
     
     if not os.path.exists('movies_dict.pkl'):
         gdown.download(id=movies_file_id, output='movies_dict.pkl', quiet=True)
